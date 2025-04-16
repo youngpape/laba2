@@ -1,0 +1,50 @@
+use std::io;
+
+fn count_safe_stones(n: usize, stones: usize, birds: Vec<usize>) -> usize {
+    let mut visited = vec![false; stones + 1];
+
+    // Для каждой птицы помечаем её путь через камни
+    for bird in birds {
+        let mut i = bird;
+        while i <= stones {
+            visited[i] = true;
+            i += bird;
+        }
+    }
+
+    // Подсчёт камней, которые остались не посещёнными
+    let mut safe_count = 0;
+    for i in 1..=stones {
+        if !visited[i] {
+            safe_count += 1;
+        }
+    }
+
+    safe_count
+}
+
+fn main() {
+    let mut input = String::new();
+
+    println!("Введите количество птиц (N): ");
+    io::stdin().read_line(&mut input).unwrap();
+    let n: usize = input.trim().parse().unwrap();
+    input.clear();
+
+    println!("Введите количество камней (stones): ");
+    io::stdin().read_line(&mut input).unwrap();
+    let stones: usize = input.trim().parse().unwrap();
+    input.clear();
+
+    println!("Введите возможности каждой птицы через пробел: ");
+    io::stdin().read_line(&mut input).unwrap();
+    let birds: Vec<usize> = input
+        .trim()
+        .split_whitespace()
+        .map(|s| s.parse().unwrap())
+        .collect();
+
+    let result = count_safe_stones(n, stones, birds);
+    println!("Количество камней, которые не посетит ни одна птица: {}", result);
+}
+

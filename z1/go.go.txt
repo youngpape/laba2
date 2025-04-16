@@ -1,0 +1,46 @@
+package main
+
+import (
+	"fmt"
+)
+
+// Функция для подсчёта количества безопасных камней
+func countSafeStones(n int, stones int, birds []int) int {
+	visited := make([]bool, stones+1)
+
+	// Для каждой птицы помечаем её путь через камни
+	for _, bird := range birds {
+		for i := bird; i <= stones; i += bird {
+			visited[i] = true
+		}
+	}
+
+	// Подсчёт камней, которые остались не посещёнными
+	safeCount := 0
+	for i := 1; i <= stones; i++ {
+		if !visited[i] {
+			safeCount++
+		}
+	}
+
+	return safeCount
+}
+
+func main() {
+	var n, stones int
+	fmt.Print("Введите количество птиц (N): ")
+	fmt.Scan(&n)
+
+	fmt.Print("Введите количество камней (stones): ")
+	fmt.Scan(&stones)
+
+	birds := make([]int, n)
+	fmt.Print("Введите возможности каждой птицы через пробел: ")
+	for i := 0; i < n; i++ {
+		fmt.Scan(&birds[i])
+	}
+
+	result := countSafeStones(n, stones, birds)
+	fmt.Printf("Количество камней, которые не посетит ни одна птица: %d\n", result)
+}
+

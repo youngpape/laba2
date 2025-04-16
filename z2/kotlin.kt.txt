@@ -1,0 +1,23 @@
+fun isPangram(sentence: String): Boolean {
+    val letters = mutableSetOf<Char>()
+
+    for (char in sentence.lowercase()) {
+        if (char in 'a'..'z') {
+            letters.add(char)
+        }
+    }
+
+    return letters.size == 26
+}
+
+fun main() {
+    print("Введите строку: ")
+    val input = readLine() ?: ""
+
+    if (isPangram(input)) {
+        println("Вывод: true (является панграммой)")
+    } else {
+        println("Вывод: false (не является панграммой)")
+    }
+}
+

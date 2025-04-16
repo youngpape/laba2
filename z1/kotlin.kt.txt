@@ -1,0 +1,37 @@
+fun countSafeStones(n: Int, stones: Int, birds: List<Int>): Int {
+    val visited = BooleanArray(stones + 1) { false }
+
+    // Для каждой птицы помечаем её путь через камни
+    for (bird in birds) {
+        var i = bird
+        while (i <= stones) {
+            visited[i] = true
+            i += bird
+        }
+    }
+
+    // Подсчёт камней, которые остались не посещёнными
+    var safeCount = 0
+    for (i in 1..stones) {
+        if (!visited[i]) {
+            safeCount++
+        }
+    }
+
+    return safeCount
+}
+
+fun main() {
+    print("Введите количество птиц (N): ")
+    val n = readLine()!!.toInt()
+
+    print("Введите количество камней (stones): ")
+    val stones = readLine()!!.toInt()
+
+    print("Введите возможности каждой птицы через пробел: ")
+    val birds = readLine()!!.split(" ").map { it.toInt() }
+
+    val result = countSafeStones(n, stones, birds)
+    println("Количество камней, которые не посетит ни одна птица: $result")
+}
+

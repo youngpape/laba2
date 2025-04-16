@@ -1,0 +1,39 @@
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+func main() {
+	var N int64
+	fmt.Print("Введите число: ")
+	fmt.Scan(&N)
+
+	N = int64(math.Abs(float64(N))) // Преобразуем число в положительное значение
+
+	var digits []int // Слайс для хранения цифр числа
+
+	// Извлекаем цифры числа и сохраняем их в слайс
+	for N > 0 {
+		digits = append(digits, int(N%10))
+		N /= 10
+	}
+
+	// Вычисляем сумму и произведение цифр
+	sum := 0
+	product := int64(1)
+
+	// Индексация идет с 0, то есть первая цифра будет с индексом 0
+	for _, digit := range digits {
+		sum += digit        // Суммируем цифры
+		product *= int64(digit) // Умножаем цифры
+	}
+
+	difference := int64(math.Abs(float64(sum - int(product)))) // Модуль разности
+
+	// Выводим результат
+	fmt.Printf("Сумма цифр: %d\n", sum)
+	fmt.Printf("Произведение цифр: %d\n", product)
+	fmt.Printf("Модуль разности: %d\n", difference)
+}

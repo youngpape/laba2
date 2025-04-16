@@ -1,0 +1,34 @@
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+)
+
+func isPangram(sentence string) bool {
+	letters := make(map[rune]bool)
+
+	for _, c := range strings.ToLower(sentence) {
+		if c >= 'a' && c <= 'z' {
+			letters[c] = true
+		}
+	}
+
+	return len(letters) == 26
+}
+
+func main() {
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("Введите строку: ")
+	input, _ := reader.ReadString('\n')
+	input = strings.TrimSpace(input)
+
+	if isPangram(input) {
+		fmt.Println("Вывод: true (является панграммой)")
+	} else {
+		fmt.Println("Вывод: false (не является панграммой)")
+	}
+}
+

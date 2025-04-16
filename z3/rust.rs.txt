@@ -1,0 +1,30 @@
+use std::io;
+
+fn main() {
+    // Ввод числа
+    println!("Введите число: ");
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).expect("Не удалось прочитать строку");
+    let mut N: i64 = input.trim().parse().expect("Некорректный ввод");
+
+    N = N.abs();  // Преобразуем число в положительное значение
+
+    let mut digits = Vec::new(); // Вектор для хранения цифр числа
+
+    // Извлекаем цифры числа и сохраняем их в вектор
+    while N > 0 {
+        digits.push((N % 10) as i32);
+        N /= 10;
+    }
+
+    // Вычисляем сумму и произведение цифр
+    let sum: i32 = digits.iter().sum();  // Сумма цифр
+    let product: i64 = digits.iter().map(|&digit| digit as i64).product();  // Произведение цифр
+
+    let difference = (sum as i64 - product).abs();  // Модуль разности
+
+    // Выводим результат
+    println!("Сумма цифр: {}", sum);
+    println!("Произведение цифр: {}", product);
+    println!("Модуль разности: {}", difference);
+}

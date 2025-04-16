@@ -1,0 +1,25 @@
+fun main() {
+    print("Введите число: ")
+    var N = readLine()?.toLongOrNull() ?: return  // Чтение и проверка на корректность ввода
+
+    N = Math.abs(N)  // Преобразуем число в положительное значение
+
+    val digits = mutableListOf<Int>()  // Массив для хранения цифр числа
+
+    // Извлекаем цифры числа и сохраняем их в список
+    while (N > 0) {
+        digits.add((N % 10).toInt())
+        N /= 10
+    }
+
+    // Вычисляем сумму и произведение цифр
+    val sum = digits.sum()  // Сумма цифр
+    val product = digits.fold(1L) { acc, digit -> acc * digit }  // Произведение цифр
+
+    val difference = Math.abs(sum - product)  // Модуль разности
+
+    // Выводим результат
+    println("Сумма цифр: $sum")
+    println("Произведение цифр: $product")
+    println("Модуль разности: $difference")
+}

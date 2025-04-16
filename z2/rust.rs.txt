@@ -1,0 +1,29 @@
+use std::collections::HashSet;
+use std::io::{self, Write};
+
+fn is_pangram(sentence: &str) -> bool {
+    let mut letters = HashSet::new();
+
+    for c in sentence.to_lowercase().chars() {
+        if c >= 'a' && c <= 'z' {
+            letters.insert(c);
+        }
+    }
+
+    letters.len() == 26
+}
+
+fn main() {
+    print!("Введите строку: ");
+    io::stdout().flush().unwrap(); // чтобы сразу вывести приглашение
+
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).expect("Ошибка ввода");
+
+    if is_pangram(&input) {
+        println!("Вывод: true (является панграммой)");
+    } else {
+        println!("Вывод: false (не является панграммой)");
+    }
+}
+
