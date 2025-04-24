@@ -1,30 +1,36 @@
 use std::io;
 
 fn main() {
-    // Ввод числа
-    println!("Введите число: ");
     let mut input = String::new();
-    io::stdin().read_line(&mut input).expect("Не удалось прочитать строку");
-    let mut N: i64 = input.trim().parse().expect("Некорректный ввод");
+    println!("Введите количество чисел:");
+    io::stdin().read_line(&mut input).unwrap();
+    let t: i32 = input.trim().parse().unwrap();
 
-    N = N.abs();  // Преобразуем число в положительное значение
+    for _ in 0..t {
+        let mut input = String::new();
+        println!("Введите число:");
+        io::stdin().read_line(&mut input).unwrap();
+        let mut n: i64 = input.trim().parse().unwrap();
 
-    let mut digits = Vec::new(); // Вектор для хранения цифр числа
+        n = n.abs();
 
-    // Извлекаем цифры числа и сохраняем их в вектор
-    while N > 0 {
-        digits.push((N % 10) as i32);
-        N /= 10;
+        let mut sum = 0;
+        let mut product = 1;
+
+        while n > 0 {
+            let digit = (n % 10) as i32;
+            sum += digit;       // Добавляем цифру к сумме
+            product *= digit;   // Умножаем цифру на произведение
+            n /= 10;            // Убираем последнюю цифру из числа
+        }
+
+        let difference = (sum - product).abs();
+
+        // Выводим результат для текущего числа
+        println!("Сумма цифр: {}", sum);
+        println!("Произведение цифр: {}", product);
+        println!("Модуль разности: {}", difference);
+        println!("---------------------------");
     }
-
-    // Вычисляем сумму и произведение цифр
-    let sum: i32 = digits.iter().sum();  // Сумма цифр
-    let product: i64 = digits.iter().map(|&digit| digit as i64).product();  // Произведение цифр
-
-    let difference = (sum as i64 - product).abs();  // Модуль разности
-
-    // Выводим результат
-    println!("Сумма цифр: {}", sum);
-    println!("Произведение цифр: {}", product);
-    println!("Модуль разности: {}", difference);
 }
+

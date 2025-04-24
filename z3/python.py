@@ -1,27 +1,28 @@
 def main():
-    N = int(input("Введите число: "))
+    T = int(input("Введите количество чисел: "))
 
-    N = abs(N)  # Преобразуем число в положительное значение
+    for _ in range(T):
+        N = int(input("Введите число: "))
 
-    digits = []  # Список для хранения цифр числа
+        N = abs(N)
 
-    # Извлекаем цифры числа и сохраняем их в список
-    while N > 0:
-        digits.append(N % 10)
-        N //= 10
+        sum_digits = 0
+        product_digits = 1
 
-    # Вычисляем сумму и произведение цифр
-    sum_digits = sum(digits)  # Сумма цифр
-    product = 1
-    for digit in digits:
-        product *= digit  # Произведение цифр
+        while N > 0:
+            digit = N % 10
+            sum_digits += digit        # Добавляем цифру к сумме
+            product_digits *= digit    # Умножаем цифру на произведение
+            N //= 10                   # Убираем последнюю цифру из числа
 
-    difference = abs(sum_digits - product)  # Модуль разности
-    
-    # Выводим результат
-    print(f"Сумма цифр: {sum_digits}")
-    print(f"Произведение цифр: {product}")
-    print(f"Модуль разности: {difference}")
+        difference = abs(sum_digits - product_digits)
 
-if __name__ == "__main__": 
+        # Выводим результат для текущего числа
+        print(f"Сумма цифр: {sum_digits}")
+        print(f"Произведение цифр: {product_digits}")
+        print(f"Модуль разности: {difference}")
+        print("---------------------------")
+
+if __name__ == "__main__":
     main()
+

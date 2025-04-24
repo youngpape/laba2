@@ -1,27 +1,29 @@
-let input: string = "999999999"; // замени на нужное число
-let N = Math.abs(parseInt(input)); // Преобразуем в положительное число
+function processNumbers() {
+    const T: number = parseInt(prompt("Введите количество чисел:") || "0");
 
-let digits: number[] = [];
+    for (let i = 0; i < T; i++) {
+        const N: number = Math.abs(parseInt(prompt("Введите число:") || "0"));
 
-// Извлекаем цифры и сохраняем в массив
-while (N > 0) {
-    digits.push(N % 10);
-    N = Math.floor(N / 10);
+        let sum = 0;
+        let product = 1;
+
+        let num = N;
+        while (num > 0) {
+            const digit = num % 10;
+            sum += digit;      // Добавляем цифру к сумме
+            product *= digit;  // Умножаем цифру на произведение
+            num = Math.floor(num / 10); // Убираем последнюю цифру из числа
+        }
+
+        const difference = Math.abs(sum - product);
+
+        // Выводим результат для текущего числа
+        console.log(`Сумма цифр: ${sum}`);
+        console.log(`Произведение цифр: ${product}`);
+        console.log(`Модуль разности: ${difference}`);
+        console.log("---------------------------");
+    }
 }
 
-// Вычисляем сумму и произведение цифр
-let sum = 0;
-let product = 1;
-
-for (let i = 0; i < digits.length; i++) {
-    sum += digits[i];
-    product *= digits[i];
-}
-
-let difference = Math.abs(sum - product);
-
-// Вывод результата
-console.log("Сумма цифр:", sum);
-console.log("Произведение цифр:", product);
-console.log("Модуль разности:", difference);
+processNumbers();
 

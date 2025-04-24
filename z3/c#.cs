@@ -1,40 +1,38 @@
 using System;
-using System.Collections.Generic;
 
 class Program
 {
     static void Main()
     {
-        Console.Write("Введите число: ");
-        long N = Convert.ToInt64(Console.ReadLine());
+        Console.Write("Введите количество чисел: ");
+        int T = int.Parse(Console.ReadLine());
 
-        N = Math.Abs(N);  // Преобразуем число в положительное значение
-
-        List<int> digits = new List<int>();  // Список для хранения цифр числа
-
-        // Извлекаем цифры числа и сохраняем их в список
-        while (N > 0)
+        while (T-- > 0)
         {
-            digits.Add((int)(N % 10));
-            N /= 10;
+            Console.Write("Введите число: ");
+            long N = long.Parse(Console.ReadLine());
+
+            N = Math.Abs(N);
+
+            int sum = 0;
+            long product = 1;
+
+            while (N > 0)
+            {
+                int digit = (int)(N % 10);
+                sum += digit;        // Добавляем цифру к сумме
+                product *= digit;    // Умножаем цифру на произведение
+                N /= 10;             // Убираем последнюю цифру из числа
+            }
+
+            long difference = Math.Abs(sum - product);
+
+            // Выводим результат для текущего числа
+            Console.WriteLine($"Сумма цифр: {sum}");
+            Console.WriteLine($"Произведение цифр: {product}");
+            Console.WriteLine($"Модуль разности: {difference}");
+            Console.WriteLine("---------------------------");
         }
-
-        // Вычисляем сумму и произведение цифр
-        int sum = 0;
-        long product = 1;
-
-        // Индексация идет с 0, то есть первая цифра будет с индексом 0
-        foreach (int digit in digits)
-        {
-            sum += digit;  // Суммируем цифры
-            product *= digit;  // Умножаем цифры
-        }
-
-        long difference = Math.Abs(sum - product);  // Модуль разности
-
-        // Выводим результат
-        Console.WriteLine("Сумма цифр: " + sum);
-        Console.WriteLine("Произведение цифр: " + product);
-        Console.WriteLine("Модуль разности: " + difference);
     }
 }
+

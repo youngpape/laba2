@@ -6,34 +6,34 @@ import (
 )
 
 func main() {
-	var N int64
-	fmt.Print("Введите число: ")
-	fmt.Scan(&N)
+	var T int
+	fmt.Println("Введите количество чисел:")
+	fmt.Scan(&T)
 
-	N = int64(math.Abs(float64(N))) // Преобразуем число в положительное значение
+	for i := 0; i < T; i++ {
+		var N int64
+		fmt.Println("Введите число:")
+		fmt.Scan(&N)
 
-	var digits []int // Слайс для хранения цифр числа
+		N = int64(math.Abs(float64(N)))
 
-	// Извлекаем цифры числа и сохраняем их в слайс
-	for N > 0 {
-		digits = append(digits, int(N%10))
-		N /= 10
+		sum := 0
+		product := int64(1)
+
+		for N > 0 {
+			digit := N % 10
+			sum += int(digit)       // Добавляем цифру к сумме
+			product *= digit        // Умножаем цифру на произведение
+			N /= 10                 // Убираем последнюю цифру из числа
+		}
+
+		difference := int64(math.Abs(float64(sum - int(product))))
+
+		// Выводим результат для текущего числа
+		fmt.Printf("Сумма цифр: %d\n", sum)
+		fmt.Printf("Произведение цифр: %d\n", product)
+		fmt.Printf("Модуль разности: %d\n", difference)
+		fmt.Println("---------------------------")
 	}
-
-	// Вычисляем сумму и произведение цифр
-	sum := 0
-	product := int64(1)
-
-	// Индексация идет с 0, то есть первая цифра будет с индексом 0
-	for _, digit := range digits {
-		sum += digit        // Суммируем цифры
-		product *= int64(digit) // Умножаем цифры
-	}
-
-	difference := int64(math.Abs(float64(sum - int(product)))) // Модуль разности
-
-	// Выводим результат
-	fmt.Printf("Сумма цифр: %d\n", sum)
-	fmt.Printf("Произведение цифр: %d\n", product)
-	fmt.Printf("Модуль разности: %d\n", difference)
 }
+

@@ -1,34 +1,28 @@
 <?php
+echo "Введите количество чисел: ";
+$T = (int)trim(fgets(STDIN));
 
-function main() {
-    // Ввод числа
+while ($T--) {
     echo "Введите число: ";
-    $N = intval(fgets(STDIN));
+    $N = abs((int)trim(fgets(STDIN)));
 
-    $N = abs($N);  // Преобразуем число в положительное значение
-
-    $digits = [];  // Массив для хранения цифр числа
-
-    // Извлекаем цифры числа и сохраняем их в массив
-    while ($N > 0) {
-        array_push($digits, $N % 10);
-        $N = intdiv($N, 10);
-    }
-
-    // Вычисляем сумму и произведение цифр
-    $sum = array_sum($digits);  // Сумма цифр
+    $sum = 0;
     $product = 1;
 
-    foreach ($digits as $digit) {
-        $product *= $digit;  // Умножаем цифры
+    while ($N > 0) {
+        $digit = $N % 10;
+        $sum += $digit;      // Добавляем цифру к сумме
+        $product *= $digit;  // Умножаем цифру на произведение
+        $N = (int)($N / 10); // Убираем последнюю цифру из числа
     }
 
-    $difference = abs($sum - $product);  // Модуль разности
+    $difference = abs($sum - $product);
 
-    // Выводим результат
-    echo "Сумма цифр: " . $sum . "\n";
-    echo "Произведение цифр: " . $product . "\n";
-    echo "Модуль разности: " . $difference . "\n";
+    // Выводим результат для текущего числа
+    echo "Сумма цифр: " . $sum . PHP_EOL;
+    echo "Произведение цифр: " . $product . PHP_EOL;
+    echo "Модуль разности: " . $difference . PHP_EOL;
+    echo "---------------------------" . PHP_EOL;
 }
+?>
 
-main();

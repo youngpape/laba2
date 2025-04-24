@@ -1,35 +1,29 @@
-// Создаем объект для ввода с консоли
-var scanner = new java.util.Scanner(java.lang.System.in);
+function processNumbers() {
+    const T = parseInt(prompt("Введите количество чисел:"));
 
-// Получаем ввод от пользователя
-print("Введите число: ");
-var N = parseInt(scanner.nextLine());
+    for (let i = 0; i < T; i++) {
+        const N = Math.abs(parseInt(prompt("Введите число:")));
 
-// Преобразуем число в положительное значение
-N = Math.abs(N);
+        let sum = 0;
+        let product = 1;
 
-// Массив для хранения цифр числа
-var digits = [];
+        let num = N;
+        while (num > 0) {
+            let digit = num % 10;
+            sum += digit;      // Добавляем цифру к сумме
+            product *= digit;  // Умножаем цифру на произведение
+            num = Math.floor(num / 10); // Убираем последнюю цифру из числа
+        }
 
-// Извлекаем цифры числа и сохраняем их в массив
-while (N > 0) {
-    digits.push(N % 10);
-    N = Math.floor(N / 10);
+        let difference = Math.abs(sum - product);
+
+        // Выводим результат для текущего числа
+        console.log("Сумма цифр: " + sum);
+        console.log("Произведение цифр: " + product);
+        console.log("Модуль разности: " + difference);
+        console.log("---------------------------");
+    }
 }
 
-// Вычисляем сумму и произведение цифр
-var sum = 0;
-var product = 1;
+processNumbers();
 
-// Индексация идет с 0, то есть первая цифра будет с индексом 0
-for (var i = 0; i < digits.length; i++) {
-    sum += digits[i];  // Суммируем цифры
-    product *= digits[i];  // Умножаем цифры
-}
-
-var difference = Math.abs(sum - product);  // Модуль разности
-
-// Выводим результат
-print("Сумма цифр: " + sum);
-print("Произведение цифр: " + product);
-print("Модуль разности: " + difference);

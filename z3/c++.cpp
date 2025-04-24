@@ -1,39 +1,38 @@
 #include <iostream>
 #include <cmath>
-#include <vector>
 using namespace std;
 
 int main() {
-    long long N;
-    cout << "Введите число: ";
-    cin >> N;
+    int T;
+    cout << "Введите количество чисел: ";
+    cin >> T;
 
-    N = abs(N);  // Преобразуем число в положительное значение
+    while (T--) {
+        long long N;
+        cout << "Введите число: ";
+        cin >> N;
 
-    vector<int> digits; //массив для хранения цифр числа
+        N = abs(N);
 
-    // Извлекаем цифры числа и сохраняем их в массив
-    while (N > 0) {
-        digits.push_back(N % 10);
-        N /= 10;
+        int sum = 0;
+        long long product = 1;
+
+
+        while (N > 0) {
+            int digit = N % 10;
+            sum += digit;        // Добавляем цифру к сумме
+            product *= digit;    // Умножаем цифру на произведение
+            N /= 10;             // Убираем последнюю цифру из числа
+        }
+
+        long long difference = abs(sum - product);
+
+        // Выводим результат для текущего числа
+        cout << "Сумма цифр: " << sum << endl;
+        cout << "Произведение цифр: " << product << endl;
+        cout << "Модуль разности: " << difference << endl;
+        cout << "---------------------------" << endl;
     }
-
-    // Вычисляем сумму и произведение цифр по индексу
-    int sum = 0;
-    long long product = 1;
-
-    // Индексация идет с 0, то есть первая цифра будет с индексом 0
-    for (int i = 0; i < digits.size(); i++) {
-        sum += digits[i];  //суммируем цифры
-        product *= digits[i];  //умножаем цифры
-    }
-
-    long long difference = abs(sum - product); //моодуль разности
-
-    // Выводим результат
-    cout << "Сумма цифр: " << sum << endl;
-    cout << "Произведение цифр: " << product << endl;
-    cout << "Модуль разности: " << difference << endl;
 
     return 0;
 }

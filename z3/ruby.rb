@@ -1,27 +1,26 @@
-def main
-  print "Введите число: "
-  n = gets.to_i  # Получаем число
+puts "Введите количество чисел:"
+T = gets.to_i
 
-  n = n.abs  # Преобразуем число в положительное значение
+T.times do
+  puts "Введите число:"
+  N = gets.to_i.abs  # Берем абсолютное значение числа
 
-  digits = []  # Массив для хранения цифр числа
+  sum = 0
+  product = 1
 
-  # Извлекаем цифры числа и сохраняем их в массив
-  while n > 0
-    digits.push(n % 10)
-    n /= 10
+  while N > 0
+    digit = N % 10
+    sum += digit       # Добавляем цифру к сумме
+    product *= digit   # Умножаем цифру на произведение
+    N /= 10            # Убираем последнюю цифру из числа
   end
 
-  # Вычисляем сумму и произведение цифр
-  sum = digits.sum  # Сумма цифр
-  product = digits.inject(1) { |prod, digit| prod * digit }  # Произведение цифр
+  difference = (sum - product).abs
 
-  difference = (sum - product).abs  # Модуль разности
-
-  # Выводим результат
+  # Выводим результат для текущего числа
   puts "Сумма цифр: #{sum}"
   puts "Произведение цифр: #{product}"
   puts "Модуль разности: #{difference}"
+  puts "---------------------------"
 end
 
-main
